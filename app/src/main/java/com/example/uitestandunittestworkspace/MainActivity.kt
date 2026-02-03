@@ -8,21 +8,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.SavedStateHandle
 import com.example.uitestandunittestworkspace.ui.theme.UiTestAndUnitTestWorkSpaceTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Manual "Dependency Injection" for demonstration
-        val repository = FakeUserRepository()
-        val viewModel = UserViewModel(repository)
+        // Manual creation for demonstration (Usually handled by Hilt/ViewModelFactory)
+        val viewModel = SearchViewModel(SavedStateHandle())
 
         enableEdgeToEdge()
         setContent {
             UiTestAndUnitTestWorkSpaceTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    UserScreen(
+                    SearchScreen(
                         viewModel = viewModel,
                         modifier = Modifier.padding(innerPadding)
                     )
